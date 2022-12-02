@@ -1,4 +1,4 @@
-package com.example.Lesbarkeit.Domain;
+package com.example.Lesbarkeit;
 import com.aliasi.sentences.IndoEuropeanSentenceModel;
 import com.aliasi.sentences.SentenceModel;
 import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
