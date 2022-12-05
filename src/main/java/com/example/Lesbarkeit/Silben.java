@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Silbentrennung in Java
  */
-public class Spell {
+public class Silben {
   public static void test(String str, String strExpected) {
     System.out.println("=====================================================================");
 

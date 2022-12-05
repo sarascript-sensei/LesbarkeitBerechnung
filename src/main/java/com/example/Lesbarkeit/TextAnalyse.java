@@ -110,7 +110,7 @@ public class TextAnalyse {
 
     public int getNumberOfSyllables(){
         setContent(content);
-        String[] words = Spell.determineWord(content);
+        String[] words = Silben.determineWord(content);
         int countSyllables = 0;
         for(String w: words){
             countSyllables++;
@@ -122,7 +122,7 @@ public class TextAnalyse {
         int countSyll = 0;
         String[] word = content.split(" ");
         for (String w : word) {
-            String[] words = Spell.determineWord(w);
+            String[] words = Silben.determineWord(w);
             if(words.length>=3){
                 countSyll++;
             }
@@ -137,7 +137,7 @@ public class TextAnalyse {
         int countSyll = 0;
         String[] word = content.split(" ");
         for (String w : word) {
-            String[] words = Spell.determineWord(w);
+            String[] words = Silben.determineWord(w);
             if(words.length==1){
                 countSyll++;
             }
