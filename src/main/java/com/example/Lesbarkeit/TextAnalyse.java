@@ -42,10 +42,10 @@ public class TextAnalyse {
 
     public int getNumberOfComplexWords(){
         setContent(content);
-        String[] word = content.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+        String[] word = content.split("\\s+");
         int complexWords = 0;
         for(String w: word){
-            if(w.length()>6){
+            if(w.length()>=6){
                 complexWords++;
             }
         }
@@ -110,15 +110,46 @@ public class TextAnalyse {
 
     public int getNumberOfSyllables(){
         setContent(content);
-        String[] words = Spell.spellWord(content);
+        String[] words = Spell.determineWord(content);
         int countSyllables = 0;
         for(String w: words){
             countSyllables++;
         }
         return countSyllables;
     }
+    public double persentageOfWordsWithThreeOrMoreSyllables(){
+        setContent(content);
+        int countSyll = 0;
+        String[] word = content.split(" ");
+        for (String w : word) {
+            String[] words = Spell.determineWord(w);
+            if(words.length>=3){
+                countSyll++;
+            }
+        }
+        return (double) countSyll/getNumberOfWords();
+    }
+    public double averageNumberOfWordsPerSentence(){
+        return (double) getNumberOfWords()/getNumberOfSentences();
+    }
+    public double persentageOfWordsWithOneSyllable(){
+        setContent(content);
+        int countSyll = 0;
+        String[] word = content.split(" ");
+        for (String w : word) {
+            String[] words = Spell.determineWord(w);
+            if(words.length==1){
+                countSyll++;
+            }
+        }
+        return (double) countSyll/getNumberOfWords();
+    }
 
-    public int numberOfPerSentence() {
+    public float percentageOfWordsWithSixOrMoreMoreCharacters(){
+        return (float) getNumberOfComplexWords()/getNumberOfWords();
+    }
+
+    public static int numberOfPerSentence() {
         setContent(content);
         String[] tokens = content.split("[.?!]");
         int numsToken = tokens.length;
@@ -200,14 +231,14 @@ public class TextAnalyse {
             return round(score, 3);
     }
 
-/*    public static double calculateWienerSachtextformel() {
-        float ms = TextStatistic.percentageOfWordsWithXOrMoreSyllables(jCas, 3) * 100;
-        double sl = TextStatistic.averageNumberOfWordsPerSentence(jCas);
-        float iw = TextStatistic.percentageOfWordsWithXOrMoreCharacters(jCas, 6) * 100;
-        float es = TextStatistic.percentageOfWordsWithXSyllables(jCas, 1) * 100;
+    public double calculateWienerSachtextformel() {
+        float ms = (float) (persentageOfWordsWithThreeOrMoreSyllables() * 100);
+        double sl = averageNumberOfWordsPerSentence();
+        float iw = percentageOfWordsWithSixOrMoreMoreCharacters() * 100;
+        float es = (float) (persentageOfWordsWithOneSyllable() * 100);
 
         return 0.1935 * ms + 0.1672 * sl + 0.1297 * iw - 0.0327 * es - 0.875;
-    }*/
+    }
 
     public double precentageOfComplexWords(){
         double complexWordPrecentage = (double) (getNumberOfComplexWords()*100)/getNumberOfWords();
